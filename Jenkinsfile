@@ -18,10 +18,11 @@ pipeline {
 
         /* ===================== TASK 1 ===================== */
         stage('Build Apache Image') {
-            steps {
-                dir('apache') {
-                    sh 'docker build -t apache-site .'
-                }
+    steps {
+        sh 'docker build -t apache-site .'
+    }
+}
+
             }
         }
 
