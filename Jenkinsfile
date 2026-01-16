@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_USER = "your_dockerhub_username"
+        DOCKERHUB_USER = "vrush13"
         AWS_REGION     = "ap-south-1"
-        AWS_ACCOUNT_ID = "123456789012"
+        AWS_ACCOUNT_ID = "621703783626"
     }
 
     stages {
@@ -12,7 +12,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/your-github-username/docker-tasks.git'
+                    url:'https://github.com/Vrushk13/Apache-site.git'
             }
         }
 
