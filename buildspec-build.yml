@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      docker: 20
+  pre_build:
+    commands:
+      - ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+      - REGION=ap-south-1
+      - aws ecr get-login-password --region $REGION |
+        docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
+  build:
+    commands:
+      - docker build -t apache-site .
+      - docker tag apache-site:latest $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/apache-site:latest
+  post_build:
+    commands:
+      - docker push $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/apache-site:latest
