@@ -1,0 +1,10 @@
+version: 0.2
+
+phases:
+  deploy:
+    commands:
+      - echo "Deploying Apache container..."
+      - docker pull $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/apache-site:latest
+      - docker stop apache || true
+      - docker rm apache || true
+      - docker run -d -p 80:80 --name apache apache-site
